@@ -1,0 +1,44 @@
+<app-navbar title = "Cytaty"></app-navbar>
+<div class="container q-container">
+  <button class="btn-floating teal add-button" (click) = "toogleInput()">
+    <i class="material-icons">add</i>
+  </button>
+  <div class="row" [ngClass] = "flag ? 'nonActive' : 'active'">
+    <div class="input-field col s4">
+      <input type="text" placeholder="Autor" [(ngModel)]="quotation.author">
+      <input type="text" placeholder="Cytat"[(ngModel)] = "quotation.quotation">
+    </div>
+    <div class="input-field col s2">
+      <button class="btn small" (click) = "addQuote()">Dodaj</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s8">
+      <div class="row">
+        <div class="col s12" *ngFor = "let quote of quotes;">
+          <div class="card teal accent-4 hoverable">
+            <div class="card-content white-text">
+              <span class="card-title">
+                {{quote.quotation}}
+              </span>
+              {{quote.author}}
+            </div>
+            <div class="card-action right-align">
+              <span class="badge grey darken-2 left white-text">{{quote.votes}}</span>
+              <button class="btn blue mr-5">
+                <i class="material-icons" (click) = "addVote(quote, 1)">exposure_plus_1</i>
+              </button>
+              <button class="btn red">
+                <i class="material-icons" (click) = "addVote(quote, -1)">exposure_neg_1</i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s4">
+     <app-ranking [quotes] = "bestQuotes()" title = "Najlepsze cytaty"></app-ranking>
+     <app-ranking [quotes] = "worstQuotes()" title = "Najgorsze cytaty"></app-ranking>
+    </div>
+  </div>
+</div>
