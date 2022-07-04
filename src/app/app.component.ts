@@ -9,18 +9,7 @@ import { quotesInterface } from './models/quotesInterface';
 })
 export class AppComponent {
   quotes : quotesInterface[] = QUOTES;
-  flag:boolean = false;
-  quotation:quotesInterface = {author: '', quotation:'', votes: 0}
 
-
-  toogleInput():void{
-      this.flag = !this.flag;
-  }
-
-  addQuote():void {
-    this.quotes.unshift(this.quotation);
-    this.quotation = {author: '', quotation:'', votes: 0};
-  }
 
   addVote(quote:quotesInterface, vote:number):void{
     quote.votes += vote;
@@ -32,5 +21,9 @@ export class AppComponent {
 
   worstQuotes(){
     return this.quotes.filter(q=>q.votes <0)
+  }
+
+  addNewQuote(quotation:quotesInterface){
+    this.quotes.unshift(quotation)
   }
 }
